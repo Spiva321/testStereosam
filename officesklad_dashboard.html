@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ОфисСклад — аналитический дашборд</title>
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#172033;--muted:#697386;--line:#e7ebf2;--blue:#3867e8;--cyan:#16a6a1;--orange:#e59a32;--red:#d9534f;--green:#27956b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+header{background:#14213d;color:white;padding:30px max(22px,calc((100% - 1240px)/2)) 26px}
+header .eyebrow{color:#aebee0;text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:700}
+h1{font-size:30px;line-height:1.15;margin:8px 0}header p{margin:8px 0 0;color:#c5cee0}
+main{max-width:1240px;margin:24px auto;padding:0 20px 50px}
+.notice{background:#fff7e8;border:1px solid #f4d8a6;border-radius:12px;padding:13px 16px;color:#78551c;margin-bottom:18px}
+.grid{display:grid;gap:16px}.kpis{grid-template-columns:repeat(6,minmax(0,1fr));margin-bottom:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 2px 8px #14213d08;min-width:0}
+.kpi-label{color:var(--muted);font-size:12px}.kpi-value{font-size:26px;font-weight:750;letter-spacing:-.04em;margin:6px 0 2px}.kpi-foot{font-size:11px;color:var(--muted)}
+.two{grid-template-columns:1.2fr .8fr}.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+h2{font-size:18px;margin:0 0 14px}h3{font-size:14px;margin:0 0 8px}
+.sub{color:var(--muted);font-size:12px;margin-top:-8px;margin-bottom:12px}
+.chart{width:100%;height:250px;display:block}.chart.tall{height:290px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:11px;margin-top:8px}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:600}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.barlist{display:grid;gap:12px}.barrow{display:grid;grid-template-columns:145px 1fr 65px;gap:10px;align-items:center;font-size:12px}.track{height:9px;background:#edf1f7;border-radius:20px;overflow:hidden}.fill{height:100%;background:var(--blue);border-radius:20px}
+.callout{border-left:3px solid var(--blue);padding:2px 0 2px 12px;margin:12px 0}.callout.warn{border-color:var(--orange)}.callout.bad{border-color:var(--red)}
+.insights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.insight{padding:14px;border:1px solid var(--line);border-radius:10px}.insight strong{display:block;margin-bottom:5px}.tag{display:inline-block;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700;background:#edf2ff;color:#3159c9;margin-bottom:7px}
+.reco{padding:14px 0;border-bottom:1px solid var(--line)}.reco:last-child{border:0}.reco .priority{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--red)}
+.small{font-size:11px;color:var(--muted)}.foot{margin-top:20px;color:var(--muted);font-size:11px}
+.pill{display:inline-block;background:#eef2f7;padding:4px 9px;border-radius:20px;font-size:11px;color:#536078;margin:2px}
+@media(max-width:950px){.kpis{grid-template-columns:repeat(3,1fr)}.two,.three{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){header{padding:24px 18px}.kpis{grid-template-columns:repeat(2,1fr)}.two,.three,.insights{grid-template-columns:1fr}.barrow{grid-template-columns:105px 1fr 55px}.card{padding:14px}h1{font-size:25px}}
+</style>
+</head>
+<body>
+<header><div class="eyebrow">Аналитика интернет-магазина</div><h1>ОфисСклад</h1><p>Яндекс.Метрика · 22 июля — 20 октября 2026 · обзор трафика, поведения и качества данных</p></header>
+<main>
+<div class="notice"><b>Ограничение данных.</b> Электронная коммерция не подключена: в выгрузке нет заказов, выручки, товаров и среднего чека. В части отчётов роботы не исключены. Месячные таблицы охватывают 01.07–21.10 и поэтому отличаются от основного периода.</div>
+<section class="grid kpis">
+<div class="card"><div class="kpi-label">Визиты</div><div class="kpi-value">56 904</div><div class="kpi-foot">основной период</div></div>
+<div class="card"><div class="kpi-label">Пользователи</div><div class="kpi-value">20 722</div><div class="kpi-foot">уникальные люди</div></div>
+<div class="card"><div class="kpi-label">Просмотры</div><div class="kpi-value">558 546</div><div class="kpi-foot">9,82 страницы на визит</div></div>
+<div class="card"><div class="kpi-label">Отказы</div><div class="kpi-value">24,87%</div><div class="kpi-foot">общий показатель</div></div>
+<div class="card"><div class="kpi-label">Длительность визита</div><div class="kpi-value">10:54</div><div class="kpi-foot">653,7 секунды</div></div>
+<div class="card"><div class="kpi-label">Доля роботов</div><div class="kpi-value">11,7%</div><div class="kpi-foot">по отчёту устройств/итого</div></div>
+</section>
+
+<section class="grid two">
+<div class="card"><h2>Динамика визитов по месяцам</h2><div class="sub">Отчётный диапазон: июль–октябрь 2026</div><canvas id="monthly" class="chart"></canvas><div class="legend"><span><i class="dot" style="background:#3867e8"></i>Визиты</span><span><i class="dot" style="background:#e59a32"></i>Отказы, %</span></div></div>
+<div class="card"><h2>Качество трафика по источникам</h2><div class="sub">Последний значимый источник · доля отказов</div><div class="barlist" id="sources"></div><div class="small">Прямые заходы: 17 189 визитов, 52,09% отказов, 37,88% роботов.</div></div>
+</section>
+
+<section class="grid two" style="margin-top:16px">
+<div class="card"><h2>Структура устройств</h2><div class="sub">Визиты и доля от общего объёма</div><canvas id="devices" class="chart"></canvas><table><thead><tr><th>Устройство</th><th class="num">Визиты</th><th class="num">Отказы</th><th class="num">Роботы</th></tr></thead><tbody>
+<tr><td>ПК</td><td class="num">48 436</td><td class="num">25,26%</td><td class="num">13,49%</td></tr><tr><td>Смартфоны</td><td class="num">8 288</td><td class="num">22,74%</td><td class="num">1,46%</td></tr><tr><td>Планшеты</td><td class="num">179</td><td class="num">17,32%</td><td class="num">0%</td></tr></tbody></table></div>
+<div class="card"><h2>Самые просматриваемые страницы</h2><div class="sub">Топ страниц по просмотрам</div><div class="barlist" id="pages"></div><div class="callout warn"><b>Поиск и корзина — ключевые узлы.</b> /search/ получил 119 940 просмотров, корзина — 41 460, авторизация — 26 558.</div></div>
+</section>
+
+<section class="grid two" style="margin-top:16px">
+<div class="card"><h2>Новые и вернувшиеся посетители</h2><table><thead><tr><th>Сегмент</th><th class="num">Визиты</th><th class="num">Люди</th><th class="num">Отказы</th></tr></thead><tbody>
+<tr><td>Вернувшиеся</td><td class="num">35 323</td><td class="num">3 578</td><td class="num">7,67%</td></tr><tr><td>Новые</td><td class="num">21 581</td><td class="num">20 719</td><td class="num">53,01%</td></tr></tbody></table>
+<div class="callout"><b>Сильная сторона:</b> возвращающиеся посетители дают около 62% визитов и имеют низкий процент отказов.</div>
+<div class="callout warn"><b>Зона роста:</b> новые посетители отказываются значительно чаще — 53,01% против 7,67%.</div></div>
+<div class="card"><h2>Поисковый трафик</h2><div class="sub">27 730 визитов из поисковых систем</div><div class="barlist">
+<div class="barrow"><span>Яндекс</span><div class="track"><div class="fill" style="width:100%"></div></div><b>16 630</b></div>
+<div class="barrow"><span>Google</span><div class="track"><div class="fill" style="width:51.7%"></div></div><b>8 604</b></div>
+<div class="barrow"><span>Мобильный Яндекс</span><div class="track"><div class="fill" style="width:11.7%"></div></div><b>1 953</b></div>
+</div><div class="callout"><b>Поиск — главный внешний канал:</b> около 48,7% всех визитов. Отказы из поиска — 16,14%, роботы — 0,31%.</div></div>
+</section>
+
+<section class="card" style="margin-top:16px"><h2>Аномалии и качество измерений</h2><div class="insights">
+<div class="insight"><span class="tag">Критично проверить</span><strong>Всплески прямого трафика с роботами</strong>1–2 сентября: 1 437 прямых визитов, 80,31% роботов. 1–2 октября: 941 визит, 80,23% роботов.</div>
+<div class="insight"><span class="tag">Критично проверить</span><strong>17–20 сентября — аномальный период</strong>2 639 прямых визитов, 86,85% роботов; в Сингапуре зафиксировано 223 визита, 100% роботов.</div>
+<div class="insight"><span class="tag">Технический аудит</span><strong>HTTP и HTTPS в точках входа</strong>В отчёте присутствуют http:// и https:// версии страниц. HTTP-входы могут указывать на отсутствие единого перенаправления или на старые ссылки.</div>
+<div class="insight"><span class="tag">Проверить аналитику</span><strong>Несогласованные итоги разных отчётов</strong>Общие итоги месячных таблиц — 57 602 визита, основной отчёт — 56 904. Состав и период отчётов различаются.</div>
+</div></section>
+
+<section class="grid two" style="margin-top:16px">
+<div class="card"><h2>География и источники</h2><div class="sub">Выборка регионов и городов из выгрузки</div>
+<div class="callout"><b>Екатеринбург:</b> 14 114 визитов, 4,78% отказов. Свердловская область — 16 431 визит.</div>
+<div class="callout"><b>Барнаул:</b> 2 866 визитов, 3,52% отказов. Алтайский край — 3 974 визита.</div>
+<div class="callout warn"><b>Неопределённая география:</b> 7 316 визитов по региону «Не определено», отказы 72,06%; отдельная категория «Область не определена» — 1 607 визитов.</div>
+<div class="callout warn"><b>Сингапур:</b> 807 визитов и 97,77% отказов в таблице городов; в отдельном аномальном окне 17–20 сентября все 223 визита отмечены роботами.</div></div>
+<div class="card"><h2>Цели Метрики: что уже измеряется</h2><table><thead><tr><th>Цель</th><th class="num">Достижения</th></tr></thead><tbody>
+<tr><td>Поиск по сайту</td><td class="num">121 240</td></tr><tr><td>Отправка формы</td><td class="num">80 405</td></tr><tr><td>Заполнение контактных данных</td><td class="num">6 948</td></tr><tr><td>Отправка контактных данных</td><td class="num">6 703</td></tr><tr><td>Скачивание файла</td><td class="num">134</td></tr><tr><td>Клик по email</td><td class="num">32</td></tr><tr><td>Клик по телефону</td><td class="num">3</td></tr></tbody></table>
+<div class="small">Это достижения целей, не уникальные пользователи и не заказы. Автоцели могут срабатывать многократно.</div></div>
+</section>
+
+<section class="card" style="margin-top:16px"><h2>Рекомендации по изменениям на сайте</h2>
+<div class="reco"><div class="priority">Приоритет 1 · аналитика и качество данных</div><b>Подключить электронную коммерцию и сквозную воронку.</b><p>Передавать просмотр товара, добавление в корзину, начало оформления, выбор доставки/оплаты и покупку с ID заказа, выручкой и составом корзины. Разделить макроцель «заказ» и микроцели.</p></div>
+<div class="reco"><div class="priority">Приоритет 1 · техническое качество</div><b>Проверить фильтрацию роботов и всплески direct.</b><p>Сопоставить логи сервера, User-Agent, IP/ASN, частоту запросов и даты 1–2 сентября, 17–20 сентября и 1–2 октября. Не удалять трафик без проверки; настроить сегмент подозрительных визитов.</p></div>
+<div class="reco"><div class="priority">Приоритет 1 · поиск и каталог</div><b>Улучшить поиск по сайту.</b><p>Добавить автодополнение, исправление опечаток, поиск по артикулу и штрихкоду, синонимы, понятные фильтры и сортировку. Показывать число найденных товаров, наличие и быстрый переход в карточку. Отдельно анализировать запросы без результатов.</p></div>
+<div class="reco"><div class="priority">Приоритет 2 · конверсия</div><b>Упростить корзину и оформление заказа.</b><p>Сделать заметными наличие, кратность упаковки, минимальную сумму/партию, стоимость и сроки доставки. Сократить обязательные поля; дать понятный гостевой сценарий или объяснить пользу входа до принудительной авторизации.</p></div>
+<div class="reco"><div class="priority">Приоритет 2 · новые посетители</div><b>Переработать первый экран и посадочные страницы.</b><p>Для новых пользователей сразу объяснить оптовый формат, географию и условия поставки. На страницах категорий и брендов вынести быстрые фильтры, популярные категории, наличие и понятный CTA. Проверить страницы входа с повышенными отказами.</p></div>
+<div class="reco"><div class="priority">Приоритет 3 · мобильный опыт и доверие</div><b>Проверить мобильный сценарий и контактные CTA.</b><p>На смартфонах упростить фильтры, закрепить корзину и поиск, проверить скорость и удобство форм. Перепроверить события клика по телефону и email: в отчёте всего 3 и 32 достижения соответственно — это может быть как низкий спрос, так и неполная настройка.</p></div>
+</section>
+<div class="foot">Источник: предоставленная выгрузка Яндекс.Метрики. Все выводы о причинах аномалий являются гипотезами для проверки, а не установленными фактами. Перед оценкой эффективности изменений необходимо обеспечить единый период, единые фильтры роботов и корректную ecommerce-разметку.</div>
+</main>
+<script>
+const palette=['#3867e8','#16a6a1','#e59a32','#d9534f'];
+function drawBars(id,labels,values,max){const c=document.getElementById(id),ctx=c.getContext('2d'),dpr=devicePixelRatio||1,w=c.clientWidth,h=c.clientHeight;c.width=w*dpr;c.height=h*dpr;ctx.scale(dpr,dpr);const left=42,right=12,top=14,bottom=34,pw=w-left-right,ph=h-top-bottom;ctx.font='11px system-ui';ctx.strokeStyle='#e7ebf2';ctx.fillStyle='#697386';for(let i=0;i<=4;i++){let y=top+ph*i/4;ctx.beginPath();ctx.moveTo(left,y);ctx.lineTo(w-right,y);ctx.stroke();ctx.fillText(Math.round(max*(1-i/4)).toLocaleString('ru-RU'),2,y+4)}let step=pw/labels.length,bw=Math.min(46,step*.55);values.forEach((v,i)=>{let x=left+step*i+(step-bw)/2,hh=ph*v/max;ctx.fillStyle=palette[0];ctx.beginPath();ctx.roundRect(x,top+ph-hh,bw,hh,4);ctx.fill();ctx.fillStyle='#697386';ctx.textAlign='center';ctx.fillText(labels[i],x+bw/2,h-10);ctx.fillStyle='#172033';ctx.fillText(v.toLocaleString('ru-RU'),x+bw/2,top+ph-hh-6)})}
+function drawDevices(){const c=document.getElementById('devices'),ctx=c.getContext('2d'),dpr=devicePixelRatio||1,w=c.clientWidth,h=c.clientHeight;c.width=w*dpr;c.height=h*dpr;ctx.scale(dpr,dpr);let vals=[48436,8288,179],labels=['ПК','Смартфоны','Планшеты'],total=56904,x=30,y=25,barW=w-60;vals.forEach((v,i)=>{let yy=y+i*65;ctx.fillStyle='#697386';ctx.font='12px system-ui';ctx.fillText(labels[i],x,yy);ctx.fillText(v.toLocaleString('ru-RU')+' · '+(v/total*100).toFixed(1).replace('.',',')+'%',x+barW,yy);ctx.fillStyle='#edf1f7';ctx.fillRect(x,yy+12,barW,12);ctx.fillStyle=palette[i];ctx.fillRect(x,yy+12,barW*v/total,12)})}
+drawBars('monthly',['Июл','Авг','Сен','Окт'],[5404,19199,20737,12262],22000);
+drawDevices();
+const sourceData=[['Поиск',27730,16.14],['Прямые',17189,52.09],['Внутренние',9980,4.46],['Ссылки',1880,10.27],['Соцсети',42,7.14]];
+document.getElementById('sources').innerHTML=sourceData.map(([n,v,r])=>`<div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px"><b>${n}</b><span>${v.toLocaleString('ru-RU')} визитов · ${r}% отказов</span></div><div class="track"><div class="fill" style="width:${v/27730*100}%;background:${r>40?'#d9534f':r<10?'#16a6a1':'#3867e8'}"></div></div></div>`).join('');
+const pageData=[['Поиск',119940],['Корзина',41460],['Авторизация',26558],['Главная',22223],['Категория',9220],['Новинки',9050],['Каталог',7529]];
+document.getElementById('pages').innerHTML=pageData.map(([n,v])=>`<div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px"><b>${n}</b><span>${v.toLocaleString('ru-RU')}</span></div><div class="track"><div class="fill" style="width:${v/119940*100}%"></div></div></div>`).join('');
+window.addEventListener('resize',()=>{drawBars('monthly',['Июл','Авг','Сен','Окт'],[5404,19199,20737,12262],22000);drawDevices()});
+</script>
+</body></html>
